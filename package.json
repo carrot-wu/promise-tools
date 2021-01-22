@@ -1,19 +1,22 @@
 {
-  "name": "promise-tools",
+  "name": "@carrotwu/promise-tools",
   "version": "1.0.0",
   "description": "",
   "main": "dist/index.main.js",
   "jsnext:main": "dist/index.esm.js",
   "module": "dist/index.esm.js",
   "browser": "dist/index.umd.js",
+  "publishConfig": {
+    "access": "public"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "rollup -c",
     "watch": "rollup -c --watch",
     "lint": "eslint src --ext .ts --fix",
-    "dev": "ts-node-dev --respawn --transpile-only test.js"
+    "publish": "yarn build && npm publish"
   },
-  "author": "",
+  "author": "carrotwu",
   "license": "ISC",
   "devDependencies": {
     "@babel/core": "^7.12.10",

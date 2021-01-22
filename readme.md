@@ -11,7 +11,7 @@
 2. 支持最大并发数limit
 3. 支持设置promise的超时时间race
 
-```
+```js
 const { sleep, warmAll } = require('./dist/index.main');
 
 const testArray = Array.from({ length: 10 })
@@ -30,3 +30,59 @@ warmAll(testArray, { race: 3000, limit: 5 }).then((res) => console.log(res));
 + task: promiseLike函数即可
 + options.time: 抛出错误是支持自动重新发起请求的次数
 
+```js
+let time = 0;
+
+retry(
+  async () => {
+    if (time >= 2) {
+      return Promise.resolve('成功');
+    }
+    time += 1;
+    console.log(`第${time}次失败`);
+    return Promise.reject(new Error(`第${time}次失败`));
+  },
+  { time: 3 },
+).then((res) => {
+  console.log(res);
+});
+
+// 第一次失败 第二次失败 成功
+
+```
+
+### sleep(delay)
+延迟时间task
+
+```js
+/**
+ * 异步延迟函数
+ * @param delay 延迟时间
+ */
+export const sleep = (delay: number) =>
+  new Promise((resolve) => {
+    setTimeout(() => {
+      resolve(delay);
+    }, delay);
+  });
+
+```
+
+### retry(task, [options])
++ task: promiseLike函数即可
++ options.time: 超时时间
+超时时间设置，超过了超时时间并不会abort掉发送的task请求，因为是通过race模拟的所以不推荐在task中写入业务逻辑。
+
+```js
+/**
+ * 异步延迟函数
+ * @param delay 延迟时间
+ */
+export const sleep = (delay: number) =>
+  new Promise((resolve) => {
+    setTimeout(() => {
+      resolve(delay);
+    }, delay);
+  });
+
+```
