@@ -1,11 +1,12 @@
 {
   "name": "@carrotwu/promise-tools",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "",
   "main": "dist/index.main.js",
   "jsnext:main": "dist/index.esm.js",
   "module": "dist/index.esm.js",
   "browser": "dist/index.umd.js",
+  "typings": "dist/index.d.ts",
   "publishConfig": {
     "access": "public"
   },
